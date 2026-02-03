@@ -4,119 +4,304 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haber365 - En Güncel Haberler</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         /* --- GENEL AYARLAR --- */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; padding: 0; }
+        :root {
+            --primary-color: #c80000; /* Ana kırmızı */
+            --secondary-color: #222;  /* Koyu gri */
+            --bg-color: #f4f6f8;      /* Arka plan */
+            --text-color: #333;
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; padding: 0; margin: 0; }
         
         /* --- HEADER (ÜST MENÜ) --- */
-        header { background-color: #cc0000; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .container { width: 90%; max-width: 1200px; margin: auto; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
-        .logo { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
-        nav a { color: white; margin-left: 20px; font-weight: 500; font-size: 16px; transition: 0.3s; }
-        nav a:hover { color: #ffcccc; }
+        header { 
+            background-color: white; 
+            border-bottom: 3px solid var(--primary-color);
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
 
-        /* --- MANŞET ALANI (HERO) --- */
-        .manset-alani { margin-top: 20px; position: relative; border-radius: 12px; overflow: hidden; height: 400px; }
-        .manset-resim { width: 100%; height: 100%; object-fit: cover; }
+        .top-bar {
+            background-color: #111;
+            color: #ddd;
+            font-size: 12px;
+            padding: 5px 0;
+            text-align: right;
+        }
+
+        .container { width: 92%; max-width: 1200px; margin: auto; }
+        
+        .header-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 0; 
+        }
+        
+        .logo { 
+            font-family: 'Merriweather', serif;
+            font-size: 32px; 
+            font-weight: 900; 
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+        .logo span { color: var(--secondary-color); }
+
+        /* Masaüstü Menü */
+        nav ul { display: flex; }
+        nav a { 
+            color: var(--secondary-color); 
+            margin-left: 25px; 
+            font-weight: 700; 
+            font-size: 15px; 
+            text-transform: uppercase;
+        }
+        nav a:hover { color: var(--primary-color); }
+
+        /* Mobil Menü Butonu (Başlangıçta gizli) */
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+        /* --- SON DAKİKA BANDI (KAYAN YAZI) --- */
+        .breaking-news {
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            overflow: hidden;
+        }
+        .bn-title {
+            background-color: #a00000;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 2;
+        }
+        .bn-content {
+            white-space: nowrap;
+            animation: ticker 20s linear infinite;
+            padding-left: 100%; /* Ekranın dışından başlasın */
+            font-size: 14px;
+            font-weight: 500;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- MANŞET ALANI --- */
+        .manset-alani { 
+            margin-top: 20px; 
+            position: relative; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            height: 450px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .manset-resim { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
         .manset-yazi { 
             position: absolute; bottom: 0; left: 0; width: 100%; 
-            background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
-            color: white; padding: 30px; box-sizing: border-box; 
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); 
+            color: white; padding: 40px; box-sizing: border-box; 
         }
-        .manset-etiket { background: #cc0000; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; }
-        .manset-baslik { font-size: 32px; margin: 10px 0; line-height: 1.2; }
+        .manset-etiket { 
+            background: var(--primary-color); 
+            padding: 4px 12px; 
+            font-size: 11px; 
+            font-weight: bold; 
+            border-radius: 3px; 
+            text-transform: uppercase;
+        }
+        .manset-baslik { 
+            font-family: 'Merriweather', serif;
+            font-size: 38px; 
+            margin: 15px 0 10px 0; 
+            line-height: 1.1; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
 
         /* --- HABER KARTLARI --- */
-        .baslik-serit { border-left: 5px solid #cc0000; padding-left: 10px; margin: 40px 0 20px 0; font-size: 24px; font-weight: bold; }
+        .section-title { 
+            border-bottom: 2px solid #ddd; 
+            margin: 40px 0 25px 0; 
+            padding-bottom: 10px;
+            font-size: 20px; 
+            font-weight: 900; 
+            color: var(--secondary-color);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
         
-        .haber-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .haber-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
         
-        .haber-kart { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
-        .haber-kart:hover { transform: translateY(-5px); }
+        .haber-kart { 
+            background: white; 
+            border-radius: 6px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            display: flex;
+            flex-direction: column;
+        }
+        .haber-kart:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .kart-resim { width: 100%; height: 200px; object-fit: cover; }
-        .kart-icerik { padding: 20px; }
-        .kategori { color: #cc0000; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .kart-baslik { font-size: 18px; font-weight: bold; margin: 10px 0; line-height: 1.4; }
-        .kart-ozet { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 15px; }
-        .devam-btn { display: inline-block; color: #cc0000; font-weight: bold; font-size: 14px; }
-        .devam-btn:hover { text-decoration: underline; }
+        .kart-icerik { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .kategori { color: var(--primary-color); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .kart-baslik { font-family: 'Merriweather', serif; font-size: 18px; font-weight: 700; margin: 10px 0; line-height: 1.4; color: #111; }
+        .kart-ozet { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        
+        .kart-footer {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+        }
 
-        /* --- FOOTER (ALT BİLGİ) --- */
-        footer { background-color: #222; color: #bbb; padding: 40px 0; margin-top: 50px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-baslik { color: white; font-size: 18px; margin-bottom: 20px; font-weight: bold; }
-        .footer-link { display: block; margin-bottom: 10px; transition: 0.3s; }
-        .footer-link:hover { color: white; padding-left: 5px; }
-        .copyright { text-align: center; margin-top: 40px; border-top: 1px solid #444; padding-top: 20px; font-size: 14px; }
+        /* --- FOOTER --- */
+        footer { background-color: #1a1a1a; color: #999; padding: 60px 0 20px 0; margin-top: 60px; font-size: 14px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; }
+        .footer-baslik { color: white; font-size: 16px; margin-bottom: 25px; font-weight: bold; border-left: 3px solid var(--primary-color); padding-left: 10px; }
+        .footer-link { display: block; margin-bottom: 12px; transition: 0.2s; }
+        .footer-link:hover { color: white; transform: translateX(5px); }
+        .copyright { text-align: center; margin-top: 60px; border-top: 1px solid #333; padding-top: 20px; color: #555; font-size: 12px; }
+
+        /* --- RESPONSIVE (MOBİL UYUM) --- */
+        @media (max-width: 768px) {
+            .manset-baslik { font-size: 24px; }
+            .manset-alani { height: 300px; }
+            .menu-toggle { display: block; }
+            
+            nav {
+                display: none; /* Mobilde menüyü gizle */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            nav.aktif { display: block; } /* JS ile açılacak */
+            nav ul { flex-direction: column; }
+            nav a { margin: 0; padding: 15px 20px; border-bottom: 1px solid #eee; display: block; }
+        }
     </style>
 </head>
 <body>
 
+    <div class="top-bar">
+        <div class="container">
+            <span>İstanbul, 14°C <i class="fas fa-cloud"></i></span> &nbsp;|&nbsp; 
+            <span>Borsa: 9.200 <i class="fas fa-arrow-up" style="color:#0f0"></i></span>
+        </div>
+    </div>
+
     <header>
         <div class="container header-content">
-            <div class="logo">HABER365</div>
-            <nav>
-                <a href="#">GÜNDEM</a>
-                <a href="#">EKONOMİ</a>
-                <a href="#">SPOR</a>
-                <a href="#">TEKNOLOJİ</a>
+            <div class="logo">HABER<span>365</span></div>
+            <div class="menu-toggle" onclick="menuyuAcKapa()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="anaMenu">
+                <ul>
+                    <li><a href="#">Gündem</a></li>
+                    <li><a href="#">Ekonomi</a></li>
+                    <li><a href="#">Spor</a></li>
+                    <li><a href="#">Teknoloji</a></li>
+                    <li><a href="#">Dünya</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
+    <div class="breaking-news">
+        <div class="bn-title">SON DAKİKA</div>
+        <div class="bn-content">
+            TBMM'de yeni yasama yılı başladı... &nbsp;&nbsp;&bull;&nbsp;&nbsp; 
+            Milli Takım aday kadrosu açıklandı: Sürpriz isimler var... &nbsp;&nbsp;&bull;&nbsp;&nbsp; 
+            Benzine bu gece yarısından itibaren zam bekleniyor... &nbsp;&nbsp;&bull;&nbsp;&nbsp; 
+            Meteoroloji uyardı: Batı bölgelerde kuvvetli yağış...
+        </div>
+    </div>
+
     <div class="container">
         <div class="manset-alani">
-            <img src="https://picsum.photos/1200/600?random=1" alt="Haber Manşet" class="manset-resim">
+            <img src="https://picsum.photos/1200/600?random=10" alt="Haber Manşet" class="manset-resim">
             <div class="manset-yazi">
-                <span class="manset-etiket">SON DAKİKA</span>
-                <h1 class="manset-baslik">İstanbul'da Beklenen Kar Yağışı Başladı: Okullar Tatil mi?</h1>
-                <p>Meteoroloji son dakika uyarısı yaptı, akşam saatlerinde etkisi artacak.</p>
+                <span class="manset-etiket">GÜNDEM</span>
+                <h1 class="manset-baslik">Yerli Otomobil Dünya Sahnesinde: Yeni Model Tanıtıldı</h1>
+                <p>Teknoloji fuarında görücüye çıkan yerli araç, tasarımıyla tam not aldı.</p>
             </div>
         </div>
 
-        <div class="baslik-serit">Günün Öne Çıkanları</div>
+        <div class="section-title">Günün Öne Çıkanları</div>
 
         <div class="haber-grid">
             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=2" alt="Haber" class="kart-resim">
+                <img src="https://picsum.photos/400/300?random=11" alt="Haber" class="kart-resim">
                 <div class="kart-icerik">
                     <span class="kategori">TEKNOLOJİ</span>
-                    <h3 class="kart-baslik">Yapay Zeka Artık Duyguları Anlayabiliyor</h3>
-                    <p class="kart-ozet">Yeni geliştirilen model, insan sesindeki tonlamadan duygu analizi yapabiliyor.</p>
-                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                    <h3 class="kart-baslik">Yapay Zeka Devrimi Büyüyor</h3>
+                    <p class="kart-ozet">Şirketler iş süreçlerini hızlandırmak için yapay zekaya milyarlarca dolar yatırım yapıyor.</p>
+                    <div class="kart-footer">
+                        <span><i class="far fa-clock"></i> 10 dk önce</span>
+                        <span><i class="far fa-comment"></i> 5 Yorum</span>
+                    </div>
                 </div>
             </div>
 
             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=3" alt="Haber" class="kart-resim">
+                <img src="https://picsum.photos/400/300?random=12" alt="Haber" class="kart-resim">
                 <div class="kart-icerik">
                     <span class="kategori">EKONOMİ</span>
-                    <h3 class="kart-baslik">Altın Fiyatlarında Rekor Artış</h3>
-                    <p class="kart-ozet">Yatırımcıların güvenli limanı altın, haftaya rekor tazeleyerek başladı.</p>
-                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                    <h3 class="kart-baslik">Borsada Yeni Rekor Geldi</h3>
+                    <p class="kart-ozet">Yabancı yatırımcının ilgisiyle borsa endeksi tarihinin en yüksek seviyesini gördü.</p>
+                    <div class="kart-footer">
+                        <span><i class="far fa-clock"></i> 1 saat önce</span>
+                        <span><i class="far fa-comment"></i> 12 Yorum</span>
+                    </div>
                 </div>
             </div>
 
             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=4" alt="Haber" class="kart-resim">
+                <img src="https://picsum.photos/400/300?random=13" alt="Haber" class="kart-resim">
                 <div class="kart-icerik">
                     <span class="kategori">SPOR</span>
-                    <h3 class="kart-baslik">Derbi Öncesi Nefesler Tutuldu</h3>
-                    <p class="kart-ozet">Dev maç öncesi iki takımın muhtemel 11'leri belli oldu.</p>
-                    <a href="#" class="devam-btn">Devamını Oku →</a>
-                </div>
-            </div>
-             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=5" alt="Haber" class="kart-resim">
-                <div class="kart-icerik">
-                    <span class="kategori">YAŞAM</span>
-                    <h3 class="kart-baslik">Sağlıklı Yaşam İçin 5 Altın Kural</h3>
-                    <p class="kart-ozet">Uzmanlar sabah rutinlerinin gün içindeki enerjiye etkisini açıkladı.</p>
-                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                    <h3 class="kart-baslik">Şampiyonlar Ligi Kuraları Çekildi</h3>
+                    <p class="kart-ozet">Temsilcimizin grubu belli oldu. İşte zorlu rakipler ve maç takvimi.</p>
+                    <div class="kart-footer">
+                        <span><i class="far fa-clock"></i> 2 saat önce</span>
+                        <span><i class="far fa-comment"></i> 45 Yorum</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,27 +311,43 @@
         <div class="container footer-grid">
             <div>
                 <div class="footer-baslik">HABER365</div>
-                <p>Türkiye'nin en hızlı ve tarafsız haber kaynağı. Son dakika gelişmelerini anbean takip edin.</p>
+                <p style="line-height: 1.8;">Doğru, tarafsız ve hızlı haberciliğin adresi. Türkiye ve dünyadan son dakika gelişmelerini anlık olarak takip edin.</p>
+                <div style="margin-top: 20px; font-size: 20px;">
+                    <i class="fab fa-twitter" style="margin-right: 15px;"></i>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram" style="margin-left: 15px;"></i>
+                </div>
             </div>
             <div>
-                <div class="footer-baslik">KATEGORİLER</div>
-                <a href="#" class="footer-link">Gündem</a>
-                <a href="#" class="footer-link">Ekonomi</a>
-                <a href="#" class="footer-link">Spor</a>
-                <a href="#" class="footer-link">Magazin</a>
+                <div class="footer-baslik">HIZLI MENÜ</div>
+                <a href="#" class="footer-link">Yazarlar</a>
+                <a href="#" class="footer-link">Foto Galeri</a>
+                <a href="#" class="footer-link">Video Haber</a>
+                <a href="#" class="footer-link">Canlı Yayın</a>
             </div>
             <div>
                 <div class="footer-baslik">KURUMSAL</div>
                 <a href="#" class="footer-link">Künye</a>
                 <a href="#" class="footer-link">İletişim</a>
                 <a href="#" class="footer-link">Gizlilik Politikası</a>
-                <a href="#" class="footer-link">Reklam</a>
+                <a href="#" class="footer-link">Reklam Ver</a>
             </div>
         </div>
         <div class="copyright">
-            &copy; 2024 Haber365 - Tüm Hakları Saklıdır.
+            &copy; 2024 Haber365 Yazılım ve Medya A.Ş. Tüm Hakları Saklıdır.
         </div>
     </footer>
+
+    <script>
+        function menuyuAcKapa() {
+            var menu = document.getElementById("anaMenu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+    </script>
 
 </body>
 </html>
