@@ -3,67 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haber Sitesi</title>
+    <title>Haber365 - En Güncel Haberler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Genel Ayarlar */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        /* --- GENEL AYARLAR --- */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; }
         
-        /* Üst Menü (Navbar) */
-        header { background-color: #cc0000; color: white; padding: 15px 0; }
+        /* --- HEADER (ÜST MENÜ) --- */
+        header { background-color: #cc0000; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
-        .logo { font-size: 24px; font-weight: bold; float: left; }
-        nav { float: right; margin-top: 5px; }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+        nav a { color: white; margin-left: 20px; font-weight: 500; font-size: 16px; transition: 0.3s; }
+        nav a:hover { color: #ffcccc; }
+
+        /* --- MANŞET ALANI (HERO) --- */
+        .manset-alani { margin-top: 20px; position: relative; border-radius: 12px; overflow: hidden; height: 400px; }
+        .manset-resim { width: 100%; height: 100%; object-fit: cover; }
+        .manset-yazi { 
+            position: absolute; bottom: 0; left: 0; width: 100%; 
+            background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+            color: white; padding: 30px; box-sizing: border-box; 
+        }
+        .manset-etiket { background: #cc0000; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; }
+        .manset-baslik { font-size: 32px; margin: 10px 0; line-height: 1.2; }
+
+        /* --- HABER KARTLARI --- */
+        .baslik-serit { border-left: 5px solid #cc0000; padding-left: 10px; margin: 40px 0 20px 0; font-size: 24px; font-weight: bold; }
         
-        /* Manşet Alanı */
-        .manset { background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .manset h1 { margin-top: 0; color: #333; }
-        .manset p { font-size: 18px; color: #666; }
+        .haber-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 50px; }
         
-        /* Haber Kartları Izgarası */
-        .haber-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
-        .haber-kart { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .haber-kart h3 { margin-top: 0; color: #cc0000; }
-        
-        /* Temizlik (Float için) */
-        .clearfix::after { content: ""; clear: both; display: table; }
+        .haber-kart { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .haber-kart:hover { transform: translateY(-5px); }
+        .kart-resim { width: 100%; height: 200px; object-fit: cover; }
+        .kart-icerik { padding: 20px; }
+        .kategori { color: #cc0000; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .kart-baslik { font-size: 18px; font-weight: bold; margin: 10px 0; line-height: 1.4; }
+        .kart-ozet { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 15px; }
+        .devam-btn { display: inline-block; color: #cc0000; font-weight: bold; font-size: 14px; }
+        .devam-btn:hover { text-decoration: underline; }
+
+        /* --- FOOTER (ALT BİLGİ) --- */
+        footer { background-color: #222; color: #bbb; padding: 40px 0; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-baslik { color: white; font-size: 18px; margin-bottom: 20px; font-weight: bold; }
+        .footer-link { display: block; margin-bottom: 10px; transition: 0.3s; }
+        .footer-link:hover { color: white; padding-left: 5px; }
+        .copyright { text-align: center; margin-top: 40px; border-top: 1px solid #444; padding-top: 20px; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="container clearfix">
+        <div class="container header-content">
             <div class="logo">HABER365</div>
             <nav>
-                <a href="#">Gündem</a>
-                <a href="#">Ekonomi</a>
-                <a href="#">Spor</a>
-                <a href="#">Teknoloji</a>
+                <a href="#">GÜNDEM</a>
+                <a href="#">EKONOMİ</a>
+                <a href="#">SPOR</a>
+                <a href="#">TEKNOLOJİ</a>
             </nav>
         </div>
     </header>
 
     <div class="container">
-        <div class="manset">
-            <h1>SON DAKİKA: Haber Sitesi Yayına Girdi!</h1>
-            <p>GitHub üzerinden yayınlanan ilk haber sitesi, ziyaretçilerine kapılarını açtı.</p>
+        <div class="manset-alani">
+            <img src="https://picsum.photos/1200/600?random=1" alt="Haber Manşet" class="manset-resim">
+            <div class="manset-yazi">
+                <span class="manset-etiket">SON DAKİKA</span>
+                <h1 class="manset-baslik">İstanbul'da Beklenen Kar Yağışı Başladı: Okullar Tatil mi?</h1>
+                <p>Meteoroloji son dakika uyarısı yaptı, akşam saatlerinde etkisi artacak.</p>
+            </div>
         </div>
+
+        <div class="baslik-serit">Günün Öne Çıkanları</div>
 
         <div class="haber-grid">
             <div class="haber-kart">
-                <h3>Teknoloji Dünyası</h3>
-                <p>Yapay zeka teknolojileri günlük hayatımızı nasıl değiştiriyor?</p>
+                <img src="https://picsum.photos/400/300?random=2" alt="Haber" class="kart-resim">
+                <div class="kart-icerik">
+                    <span class="kategori">TEKNOLOJİ</span>
+                    <h3 class="kart-baslik">Yapay Zeka Artık Duyguları Anlayabiliyor</h3>
+                    <p class="kart-ozet">Yeni geliştirilen model, insan sesindeki tonlamadan duygu analizi yapabiliyor.</p>
+                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                </div>
             </div>
+
             <div class="haber-kart">
-                <h3>Ekonomi Gündemi</h3>
-                <p>Döviz kurlarında son durum ne? Piyasalar haftaya nasıl başladı?</p>
+                <img src="https://picsum.photos/400/300?random=3" alt="Haber" class="kart-resim">
+                <div class="kart-icerik">
+                    <span class="kategori">EKONOMİ</span>
+                    <h3 class="kart-baslik">Altın Fiyatlarında Rekor Artış</h3>
+                    <p class="kart-ozet">Yatırımcıların güvenli limanı altın, haftaya rekor tazeleyerek başladı.</p>
+                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                </div>
             </div>
+
             <div class="haber-kart">
-                <h3>Spor Haberleri</h3>
-                <p>Derbi heyecanı yaklaşıyor. Takımların son antrenman notları.</p>
+                <img src="https://picsum.photos/400/300?random=4" alt="Haber" class="kart-resim">
+                <div class="kart-icerik">
+                    <span class="kategori">SPOR</span>
+                    <h3 class="kart-baslik">Derbi Öncesi Nefesler Tutuldu</h3>
+                    <p class="kart-ozet">Dev maç öncesi iki takımın muhtemel 11'leri belli oldu.</p>
+                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                </div>
+            </div>
+             <div class="haber-kart">
+                <img src="https://picsum.photos/400/300?random=5" alt="Haber" class="kart-resim">
+                <div class="kart-icerik">
+                    <span class="kategori">YAŞAM</span>
+                    <h3 class="kart-baslik">Sağlıklı Yaşam İçin 5 Altın Kural</h3>
+                    <p class="kart-ozet">Uzmanlar sabah rutinlerinin gün içindeki enerjiye etkisini açıkladı.</p>
+                    <a href="#" class="devam-btn">Devamını Oku →</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-baslik">HABER365</div>
+                <p>Türkiye'nin en hızlı ve tarafsız haber kaynağı. Son dakika gelişmelerini anbean takip edin.</p>
+            </div>
+            <div>
+                <div class="footer-baslik">KATEGORİLER</div>
+                <a href="#" class="footer-link">Gündem</a>
+                <a href="#" class="footer-link">Ekonomi</a>
+                <a href="#" class="footer-link">Spor</a>
+                <a href="#" class="footer-link">Magazin</a>
+            </div>
+            <div>
+                <div class="footer-baslik">KURUMSAL</div>
+                <a href="#" class="footer-link">Künye</a>
+                <a href="#" class="footer-link">İletişim</a>
+                <a href="#" class="footer-link">Gizlilik Politikası</a>
+                <a href="#" class="footer-link">Reklam</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Haber365 - Tüm Hakları Saklıdır.
+        </div>
+    </footer>
 
 </body>
 </html>
