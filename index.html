@@ -118,6 +118,9 @@
             height: 450px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+        /* Manşet linki için özel ayar */
+        .manset-link { display: block; height: 100%; width: 100%; color: inherit; }
+        
         .manset-resim { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
         .manset-yazi { 
             position: absolute; bottom: 0; left: 0; width: 100%; 
@@ -176,6 +179,9 @@
         .kart-icerik { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .kategori { color: var(--primary-color); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .kart-baslik { font-family: 'Merriweather', serif; font-size: 18px; font-weight: 700; margin: 10px 0; line-height: 1.4; color: #111; }
+        /* Kart başlık linki için hover efekti */
+        .kart-baslik a:hover { color: var(--primary-color); text-decoration: underline; }
+        
         .kart-ozet { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
         
         .kart-footer {
@@ -233,7 +239,7 @@
             </div>
             <nav id="anaMenu">
                 <ul>
-                    <li><a href="#">Gündem</a></li>
+                    <li><a href="index.html">Gündem</a></li>
                     <li><a href="#">Ekonomi</a></li>
                     <li><a href="#">Spor</a></li>
                     <li><a href="#">Teknoloji</a></li>
@@ -255,22 +261,26 @@
 
     <div class="container">
         <div class="manset-alani">
-            <img src="https://picsum.photos/1200/600?random=10" alt="Haber Manşet" class="manset-resim">
-            <div class="manset-yazi">
-                <span class="manset-etiket">GÜNDEM</span>
-                <h1 class="manset-baslik">Yerli Otomobil Dünya Sahnesinde: Yeni Model Tanıtıldı</h1>
-                <p>Teknoloji fuarında görücüye çıkan yerli araç, tasarımıyla tam not aldı.</p>
-            </div>
+            <a href="haber-detay.html" class="manset-link">
+                <img src="https://picsum.photos/1200/600?random=10" alt="Haber Manşet" class="manset-resim">
+                <div class="manset-yazi">
+                    <span class="manset-etiket">GÜNDEM</span>
+                    <h1 class="manset-baslik">Yerli Otomobil Dünya Sahnesinde: Yeni Model Tanıtıldı</h1>
+                    <p>Teknoloji fuarında görücüye çıkan yerli araç, tasarımıyla tam not aldı.</p>
+                </div>
+            </a>
         </div>
 
         <div class="section-title">Günün Öne Çıkanları</div>
 
         <div class="haber-grid">
             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=11" alt="Haber" class="kart-resim">
+                <a href="haber-detay.html">
+                    <img src="https://picsum.photos/400/300?random=11" alt="Haber" class="kart-resim">
+                </a>
                 <div class="kart-icerik">
                     <span class="kategori">TEKNOLOJİ</span>
-                    <h3 class="kart-baslik">Yapay Zeka Devrimi Büyüyor</h3>
+                    <h3 class="kart-baslik"><a href="haber-detay.html">Yapay Zeka Devrimi Büyüyor</a></h3>
                     <p class="kart-ozet">Şirketler iş süreçlerini hızlandırmak için yapay zekaya milyarlarca dolar yatırım yapıyor.</p>
                     <div class="kart-footer">
                         <span><i class="far fa-clock"></i> 10 dk önce</span>
@@ -280,10 +290,12 @@
             </div>
 
             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=12" alt="Haber" class="kart-resim">
+                <a href="haber-detay.html">
+                    <img src="https://picsum.photos/400/300?random=12" alt="Haber" class="kart-resim">
+                </a>
                 <div class="kart-icerik">
                     <span class="kategori">EKONOMİ</span>
-                    <h3 class="kart-baslik">Borsada Yeni Rekor Geldi</h3>
+                    <h3 class="kart-baslik"><a href="haber-detay.html">Borsada Yeni Rekor Geldi</a></h3>
                     <p class="kart-ozet">Yabancı yatırımcının ilgisiyle borsa endeksi tarihinin en yüksek seviyesini gördü.</p>
                     <div class="kart-footer">
                         <span><i class="far fa-clock"></i> 1 saat önce</span>
@@ -293,10 +305,12 @@
             </div>
 
             <div class="haber-kart">
-                <img src="https://picsum.photos/400/300?random=13" alt="Haber" class="kart-resim">
+                <a href="haber-detay.html">
+                    <img src="https://picsum.photos/400/300?random=13" alt="Haber" class="kart-resim">
+                </a>
                 <div class="kart-icerik">
                     <span class="kategori">SPOR</span>
-                    <h3 class="kart-baslik">Şampiyonlar Ligi Kuraları Çekildi</h3>
+                    <h3 class="kart-baslik"><a href="haber-detay.html">Şampiyonlar Ligi Kuraları Çekildi</a></h3>
                     <p class="kart-ozet">Temsilcimizin grubu belli oldu. İşte zorlu rakipler ve maç takvimi.</p>
                     <div class="kart-footer">
                         <span><i class="far fa-clock"></i> 2 saat önce</span>
