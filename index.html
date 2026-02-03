@@ -9,191 +9,54 @@
     
     <style>
         /* --- GENEL AYARLAR --- */
-        :root {
-            --primary-color: #c80000; /* Ana kırmızı */
-            --secondary-color: #222;  /* Koyu gri */
-            --bg-color: #f4f6f8;      /* Arka plan */
-            --text-color: #333;
-        }
-
-        body { 
-            font-family: 'Roboto', sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-        }
-
+        :root { --primary-color: #c80000; --secondary-color: #222; --bg-color: #f4f6f8; --text-color: #333; }
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; padding: 0; margin: 0; }
         
-        /* --- HEADER (ÜST MENÜ) --- */
-        header { 
-            background-color: white; 
-            border-bottom: 3px solid var(--primary-color);
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .top-bar {
-            background-color: #111;
-            color: #ddd;
-            font-size: 12px;
-            padding: 5px 0;
-            text-align: right;
-        }
-
+        /* HEADER */
+        header { background-color: white; border-bottom: 3px solid var(--primary-color); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .top-bar { background-color: #111; color: #ddd; font-size: 12px; padding: 5px 0; text-align: right; }
         .container { width: 92%; max-width: 1200px; margin: auto; }
-        
-        .header-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px 0; 
-        }
-        
-        .logo { 
-            font-family: 'Merriweather', serif;
-            font-size: 32px; 
-            font-weight: 900; 
-            color: var(--primary-color);
-            letter-spacing: -1px;
-        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo { font-family: 'Merriweather', serif; font-size: 32px; font-weight: 900; color: var(--primary-color); letter-spacing: -1px; }
         .logo span { color: var(--secondary-color); }
-
-        /* Masaüstü Menü */
         nav ul { display: flex; }
-        nav a { 
-            color: var(--secondary-color); 
-            margin-left: 25px; 
-            font-weight: 700; 
-            font-size: 15px; 
-            text-transform: uppercase;
-        }
+        nav a { color: var(--secondary-color); margin-left: 25px; font-weight: 700; font-size: 15px; text-transform: uppercase; }
         nav a:hover { color: var(--primary-color); }
-
-        /* Mobil Menü Butonu (Başlangıçta gizli) */
         .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
 
-        /* --- SON DAKİKA BANDI (KAYAN YAZI) --- */
-        .breaking-news {
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            height: 40px;
-            overflow: hidden;
-        }
-        .bn-title {
-            background-color: #a00000;
-            padding: 0 20px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 14px;
-            white-space: nowrap;
-            z-index: 2;
-        }
-        .bn-content {
-            white-space: nowrap;
-            animation: ticker 20s linear infinite;
-            padding-left: 100%; /* Ekranın dışından başlasın */
-            font-size: 14px;
-            font-weight: 500;
-        }
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
+        /* SON DAKİKA */
+        .breaking-news { background-color: var(--primary-color); color: white; display: flex; align-items: center; height: 40px; overflow: hidden; }
+        .bn-title { background-color: #a00000; padding: 0 20px; height: 100%; display: flex; align-items: center; font-weight: bold; font-size: 14px; white-space: nowrap; z-index: 2; }
+        .bn-content { white-space: nowrap; animation: ticker 20s linear infinite; padding-left: 100%; font-size: 14px; font-weight: 500; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        /* --- MANŞET ALANI --- */
-        .manset-alani { 
-            margin-top: 20px; 
-            position: relative; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            height: 450px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        /* Manşet linki için özel ayar */
+        /* MANŞET */
+        .manset-alani { margin-top: 20px; position: relative; border-radius: 8px; overflow: hidden; height: 450px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .manset-link { display: block; height: 100%; width: 100%; color: inherit; }
-        
         .manset-resim { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
-        .manset-yazi { 
-            position: absolute; bottom: 0; left: 0; width: 100%; 
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); 
-            color: white; padding: 40px; box-sizing: border-box; 
-        }
-        .manset-etiket { 
-            background: var(--primary-color); 
-            padding: 4px 12px; 
-            font-size: 11px; 
-            font-weight: bold; 
-            border-radius: 3px; 
-            text-transform: uppercase;
-        }
-        .manset-baslik { 
-            font-family: 'Merriweather', serif;
-            font-size: 38px; 
-            margin: 15px 0 10px 0; 
-            line-height: 1.1; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        .manset-yazi { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); color: white; padding: 40px; box-sizing: border-box; }
+        .manset-etiket { background: var(--primary-color); padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 3px; text-transform: uppercase; }
+        .manset-baslik { font-family: 'Merriweather', serif; font-size: 38px; margin: 15px 0 10px 0; line-height: 1.1; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-        /* --- HABER KARTLARI --- */
-        .section-title { 
-            border-bottom: 2px solid #ddd; 
-            margin: 40px 0 25px 0; 
-            padding-bottom: 10px;
-            font-size: 20px; 
-            font-weight: 900; 
-            color: var(--secondary-color);
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 80px;
-            height: 2px;
-            background-color: var(--primary-color);
-        }
+        /* HABER KARTLARI */
+        .section-title { border-bottom: 2px solid #ddd; margin: 40px 0 25px 0; padding-bottom: 10px; font-size: 20px; font-weight: 900; color: var(--secondary-color); position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 80px; height: 2px; background-color: var(--primary-color); }
         
         .haber-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
         
-        .haber-kart { 
-            background: white; 
-            border-radius: 6px; 
-            overflow: hidden; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
-            transition: transform 0.3s, box-shadow 0.3s; 
-            display: flex;
-            flex-direction: column;
-        }
+        .haber-kart { background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
         .haber-kart:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .kart-resim { width: 100%; height: 200px; object-fit: cover; }
         .kart-icerik { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .kategori { color: var(--primary-color); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .kart-baslik { font-family: 'Merriweather', serif; font-size: 18px; font-weight: 700; margin: 10px 0; line-height: 1.4; color: #111; }
-        /* Kart başlık linki için hover efekti */
         .kart-baslik a:hover { color: var(--primary-color); text-decoration: underline; }
-        
         .kart-ozet { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-        
-        .kart-footer {
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            font-size: 12px;
-            color: #999;
-            display: flex;
-            justify-content: space-between;
-        }
+        .kart-footer { border-top: 1px solid #eee; padding-top: 15px; font-size: 12px; color: #999; display: flex; justify-content: space-between; }
 
-        /* --- FOOTER --- */
+        /* FOOTER & MOBILE */
         footer { background-color: #1a1a1a; color: #999; padding: 60px 0 20px 0; margin-top: 60px; font-size: 14px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; }
         .footer-baslik { color: white; font-size: 16px; margin-bottom: 25px; font-weight: bold; border-left: 3px solid var(--primary-color); padding-left: 10px; }
@@ -201,22 +64,12 @@
         .footer-link:hover { color: white; transform: translateX(5px); }
         .copyright { text-align: center; margin-top: 60px; border-top: 1px solid #333; padding-top: 20px; color: #555; font-size: 12px; }
 
-        /* --- RESPONSIVE (MOBİL UYUM) --- */
         @media (max-width: 768px) {
             .manset-baslik { font-size: 24px; }
             .manset-alani { height: 300px; }
             .menu-toggle { display: block; }
-            
-            nav {
-                display: none; /* Mobilde menüyü gizle */
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            }
-            nav.aktif { display: block; } /* JS ile açılacak */
+            nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+            nav.aktif { display: block; }
             nav ul { flex-direction: column; }
             nav a { margin: 0; padding: 15px 20px; border-bottom: 1px solid #eee; display: block; }
         }
@@ -273,51 +126,8 @@
 
         <div class="section-title">Günün Öne Çıkanları</div>
 
-        <div class="haber-grid">
-            <div class="haber-kart">
-                <a href="haber-detay.html">
-                    <img src="https://picsum.photos/400/300?random=11" alt="Haber" class="kart-resim">
-                </a>
-                <div class="kart-icerik">
-                    <span class="kategori">TEKNOLOJİ</span>
-                    <h3 class="kart-baslik"><a href="haber-detay.html">Yapay Zeka Devrimi Büyüyor</a></h3>
-                    <p class="kart-ozet">Şirketler iş süreçlerini hızlandırmak için yapay zekaya milyarlarca dolar yatırım yapıyor.</p>
-                    <div class="kart-footer">
-                        <span><i class="far fa-clock"></i> 10 dk önce</span>
-                        <span><i class="far fa-comment"></i> 5 Yorum</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="haber-kart">
-                <a href="haber-detay.html">
-                    <img src="https://picsum.photos/400/300?random=12" alt="Haber" class="kart-resim">
-                </a>
-                <div class="kart-icerik">
-                    <span class="kategori">EKONOMİ</span>
-                    <h3 class="kart-baslik"><a href="haber-detay.html">Borsada Yeni Rekor Geldi</a></h3>
-                    <p class="kart-ozet">Yabancı yatırımcının ilgisiyle borsa endeksi tarihinin en yüksek seviyesini gördü.</p>
-                    <div class="kart-footer">
-                        <span><i class="far fa-clock"></i> 1 saat önce</span>
-                        <span><i class="far fa-comment"></i> 12 Yorum</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="haber-kart">
-                <a href="haber-detay.html">
-                    <img src="https://picsum.photos/400/300?random=13" alt="Haber" class="kart-resim">
-                </a>
-                <div class="kart-icerik">
-                    <span class="kategori">SPOR</span>
-                    <h3 class="kart-baslik"><a href="haber-detay.html">Şampiyonlar Ligi Kuraları Çekildi</a></h3>
-                    <p class="kart-ozet">Temsilcimizin grubu belli oldu. İşte zorlu rakipler ve maç takvimi.</p>
-                    <div class="kart-footer">
-                        <span><i class="far fa-clock"></i> 2 saat önce</span>
-                        <span><i class="far fa-comment"></i> 45 Yorum</span>
-                    </div>
-                </div>
-            </div>
+        <div class="haber-grid" id="haberAlani">
+            <p style="text-align:center; width:100%; color:#999;">Haberler yükleniyor...</p>
         </div>
     </div>
 
@@ -353,6 +163,7 @@
     </footer>
 
     <script>
+        // Mobil Menü
         function menuyuAcKapa() {
             var menu = document.getElementById("anaMenu");
             if (menu.style.display === "block") {
@@ -361,6 +172,42 @@
                 menu.style.display = "block";
             }
         }
+
+        // HABERLERİ JSON'DAN ÇEKME
+        fetch('haberler.json')
+            .then(response => response.json())
+            .then(data => {
+                const haberKutusu = document.getElementById('haberAlani');
+                // Önce "Yükleniyor" yazısını temizle
+                haberKutusu.innerHTML = "";
+
+                // Haberleri tek tek ekle
+                data.forEach(haber => {
+                    const html = `
+                        <div class="haber-kart">
+                            <a href="${haber.link}">
+                                <img src="${haber.resim}" alt="${haber.baslik}" class="kart-resim">
+                            </a>
+                            <div class="kart-icerik">
+                                <span class="kategori">${haber.kategori}</span>
+                                <h3 class="kart-baslik">
+                                    <a href="${haber.link}">${haber.baslik}</a>
+                                </h3>
+                                <p class="kart-ozet">${haber.ozet}</p>
+                                <div class="kart-footer">
+                                    <span><i class="far fa-clock"></i> ${haber.tarih}</span>
+                                    <span><i class="far fa-comment"></i> 0 Yorum</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    haberKutusu.innerHTML += html;
+                });
+            })
+            .catch(error => {
+                console.error('Haberler okunamadı:', error);
+                document.getElementById('haberAlani').innerHTML = "<p>Haberler yüklenirken bir hata oluştu.</p>";
+            });
     </script>
 
 </body>

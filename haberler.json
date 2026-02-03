@@ -1,0 +1,26 @@
+[
+    {
+        "baslik": "Yapay Zeka Devrimi Büyüyor",
+        "ozet": "Şirketler iş süreçlerini hızlandırmak için yapay zekaya milyarlarca dolar yatırım yapıyor.",
+        "kategori": "TEKNOLOJİ",
+        "resim": "https://picsum.photos/400/300?random=11",
+        "link": "haber-detay.html",
+        "tarih": "10 dk önce"
+    },
+    {
+        "baslik": "Borsada Yeni Rekor Geldi",
+        "ozet": "Yabancı yatırımcının ilgisiyle borsa endeksi tarihinin en yüksek seviyesini gördü.",
+        "kategori": "EKONOMİ",
+        "resim": "https://picsum.photos/400/300?random=12",
+        "link": "haber-detay.html",
+        "tarih": "1 saat önce"
+    },
+    {
+        "baslik": "Şampiyonlar Ligi Kuraları Çekildi",
+        "ozet": "Temsilcimizin grubu belli oldu. İşte zorlu rakipler ve maç takvimi.",
+        "kategori": "SPOR",
+        "resim": "https://picsum.photos/400/300?random=13",
+        "link": "haber-detay.html",
+        "tarih": "2 saat önce"
+    }
+]
